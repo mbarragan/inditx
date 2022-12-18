@@ -1,9 +1,5 @@
 # inditx demo
 
-[![Coverage Status](https://coveralls.io/repos/github/mbarragan/inditx/badge.svg?branch=master)]
-(https://coveralls.io/github/mbarragan/inditx?branch=master)
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-
 Rest Microservice [Spring Boot v2.7.6](http://projects.spring.io/spring-boot/) sample app for Inditex.
 See technical documentation (Postman collection and Swagger yaml file) on the project root.
 
@@ -23,8 +19,6 @@ For building and running the application you need:
 Arquitecture based on the article
 [Organizing Layers Using Hexagonal Architecture, DDD, and Spring](https://www.baeldung.com/hexagonal-architecture-ddd-spring) 
 by Baeldung.
-
-
 
 ---------------------------------
 ## La prueba

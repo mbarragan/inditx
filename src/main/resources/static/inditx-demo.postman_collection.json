@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "98153bd4-5d22-4d3b-a340-679564554fa7",
+		"name": "inditx-demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13328765"
+	},
+	"item": [
+		{
+			"name": "getFare",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": 35455,\n    \"startDate\": \"2020-06-14T10:00:00\",\n    \"brandId\": 1\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/fare",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fare"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
