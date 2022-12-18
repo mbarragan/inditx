@@ -1,13 +1,14 @@
 # inditx demo
 
 Rest Microservice [Spring Boot v2.7.6](http://projects.spring.io/spring-boot/) sample app for Inditex.
-See technical documentation (Postman collection and Swagger yaml file) on the project root.
+See technical documentation (Postman collection as a resource, [OpenAPI](http://localhost:8080/api-docs) 
+and [Swagger](http://localhost:8080/swagger-ui.html) ) on the project root.
 
 You can find the requested tests as described below in class `ItxDemoIntegrationTest.java` implemented in 
 [JUnit5](https://junit.org/junit5/docs/current/user-guide/).
 
 
-NOTE: Other tests were implemented to improve coverage.
+NOTE: Other tests were implemented to improve coverage (98% lines).
 
 ## Requirements
 
