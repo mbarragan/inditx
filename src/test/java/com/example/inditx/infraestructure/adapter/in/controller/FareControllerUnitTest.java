@@ -1,39 +1,35 @@
-package com.example.inditx.application.rest.controller;
+package com.example.inditx.infraestructure.adapter.in.controller;
 
-import com.example.inditx.domain.model.FareModel;
-import com.example.inditx.domain.service.FareService;
-import com.example.inditx.util.Constants;
+import com.example.inditx.domain.model.FareDTO;
+import com.example.inditx.domain.ports.in.service.FareService;
+import com.example.inditx.util.Util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
 class FareControllerUnitTest {
 
+    private final FareDTO fareDTOMock = Util.getFareDTOMock();
+
     @Test
     void  shouldGetFare() {
-        FareModel fareModelMock = new FareModel(null, Constants.PRODUCT_ID_MOCK,
-            Constants.FARE_DATETIME_MOCK_2, null, Constants.BRAND_ID_MOCK, null);
-
         FareService fareServiceMock = Mockito.mock(FareService.class);
         Mockito.when(fareServiceMock.getFareByProductAndBrand(any()))
-            .thenReturn(Optional.of(fareModelMock));
+            .thenReturn(Optional.of(fareDTOMock));
 
         FareController fareController = new FareController(fareServiceMock);
-        Assertions.assertNotNull(fareController.getFare(fareModelMock));
+        Assertions.assertNotNull(fareController.getFare(fareDTOMock));
     }
 
     @Test()
     void shouldNotGetFare() {
         String actualMessage = com.example.inditx.domain.Constants.MESSAGE_FARE_NOT_FOUND;
-        FareModel fareModelMock = new FareModel(null, Constants.PRODUCT_ID_MOCK,
-            Constants.FARE_DATETIME_MOCK_2, null, Constants.BRAND_ID_MOCK, null);
 
         FareService fareServiceMock = Mockito.mock(FareService.class);
         Mockito.when(fareServiceMock.getFareByProductAndBrand(any()))
@@ -41,7 +37,7 @@ class FareControllerUnitTest {
 
         FareController fareController = new FareController(fareServiceMock);
         ResponseStatusException exception = Assertions.assertThrows(ResponseStatusException.class, () -> {
-            fareController.getFare(fareModelMock);
+            fareController.getFare(fareDTOMock);
         });
 
         Assertions.assertEquals( exception.getMessage(),HttpStatus.NOT_FOUND.toString() + " \"" + actualMessage + "\"");

@@ -1,9 +1,10 @@
 package com.example.inditx;
 
-import com.example.inditx.domain.model.FareModel;
-import com.example.inditx.infraestructure.model.Fare;
-import com.example.inditx.infraestructure.repository.FareRepository;
+import com.example.inditx.domain.model.FareDTO;
+import com.example.inditx.domain.model.FareEntity;
+import com.example.inditx.domain.ports.out.repository.FareRepository;
 import com.example.inditx.util.Constants;
+import com.example.inditx.util.Util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,30 +18,28 @@ class InditxApplicationTests {
 	@Autowired
 	private FareRepository fareRepository;
 
+	private final FareDTO fareDTOMock = Util.getFareDTOMock();
+
 	@Test
 	void givenFareRepository_whenRetrieveEntityBy_20210614T1000_thenOK() {
-		FareModel fareModel = new FareModel(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_1, null,
-			Constants.BRAND_ID_MOCK, null);
-		Optional<Fare> fareFoundOpt =
+		Optional<FareEntity> fareFoundOpt =
 			fareRepository.findFirstByStartDateBeforeAndEndDateAfterAndProductIdAndBrandIdOrderByPriorityDesc(
 				Constants.FARE_DATETIME_MOCK_1, Constants.FARE_DATETIME_MOCK_1, Constants.PRODUCT_ID_MOCK,
 				Constants.BRAND_ID_MOCK);
 
 		Assertions.assertTrue(fareFoundOpt.isPresent());
-		validateGeneralAssertions(fareModel, fareFoundOpt.get());
+		validateGeneralAssertions(fareDTOMock, fareFoundOpt.get());
 	}
 
 	@Test
 	void givenFareRepository_whenRetrieveEntityBy_20210614T1600_thenOK() {
-		FareModel fareModel = new FareModel(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_2, null,
-			Constants.BRAND_ID_MOCK, null);
-		Optional<Fare> fareFoundOpt =
+		Optional<FareEntity> fareFoundOpt =
 			fareRepository.findFirstByStartDateBeforeAndEndDateAfterAndProductIdAndBrandIdOrderByPriorityDesc(
 				Constants.FARE_DATETIME_MOCK_2, Constants.FARE_DATETIME_MOCK_2, Constants.PRODUCT_ID_MOCK,
 				Constants.BRAND_ID_MOCK);
 
 		Assertions.assertTrue(fareFoundOpt.isPresent());
-		validateGeneralAssertions(fareModel, fareFoundOpt.get());
+		validateGeneralAssertions(fareDTOMock, fareFoundOpt.get());
 		Assertions.assertEquals(Constants.FARE_ID_MOCK_2, fareFoundOpt.get().getId());
 		Assertions.assertEquals(Constants.FARE_AMOUNT_MOCK, fareFoundOpt.get().getPrice());
 		Assertions.assertEquals(Constants.FARE_CURRENCY_MOCK, fareFoundOpt.get().getCurrency());
@@ -49,49 +48,47 @@ class InditxApplicationTests {
 
 	@Test
 	void givenFareRepository_whenRetrieveEntityBy_20210614T2100_thenOK() {
-		FareModel fareModel = new FareModel(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_3, null,
-			Constants.BRAND_ID_MOCK, null);
-		Optional<Fare> fareFoundOpt =
+		Optional<FareEntity> fareFoundOpt =
 			fareRepository.findFirstByStartDateBeforeAndEndDateAfterAndProductIdAndBrandIdOrderByPriorityDesc(
 				Constants.FARE_DATETIME_MOCK_3, Constants.FARE_DATETIME_MOCK_3, Constants.PRODUCT_ID_MOCK,
 				Constants.BRAND_ID_MOCK);
 
 		Assertions.assertTrue(fareFoundOpt.isPresent());
-		validateGeneralAssertions(fareModel, fareFoundOpt.get());
+		validateGeneralAssertions(fareDTOMock, fareFoundOpt.get());
 	}
 
 	@Test
 	void givenFareRepository_whenRetrieveEntityBy_20210615T1000_thenOK() {
-		FareModel fareModel = new FareModel(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_4, null,
+		FareDTO fareDTOMock_time4 = new FareDTO(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_4, null,
 			Constants.BRAND_ID_MOCK, null);
-		Optional<Fare> fareFoundOpt =
+		Optional<FareEntity> fareFoundOpt =
 			fareRepository.findFirstByStartDateBeforeAndEndDateAfterAndProductIdAndBrandIdOrderByPriorityDesc(
 				Constants.FARE_DATETIME_MOCK_4, Constants.FARE_DATETIME_MOCK_4, Constants.PRODUCT_ID_MOCK,
 				Constants.BRAND_ID_MOCK);
 
 		Assertions.assertTrue(fareFoundOpt.isPresent());
-		validateGeneralAssertions(fareModel, fareFoundOpt.get());
+		validateGeneralAssertions(fareDTOMock_time4, fareFoundOpt.get());
 	}
 
 	@Test
 	void givenFareRepository_whenRetrieveEntityBy_20210616T2100_thenOK() {
-		FareModel fareModel = new FareModel(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_5, null,
+		FareDTO fareDTOMock_time5 = new FareDTO(null, Constants.PRODUCT_ID_MOCK, Constants.FARE_DATETIME_MOCK_5, null,
 			Constants.BRAND_ID_MOCK, null);
-		Optional<Fare> fareFoundOpt =
+		Optional<FareEntity> fareFoundOpt =
 			fareRepository.findFirstByStartDateBeforeAndEndDateAfterAndProductIdAndBrandIdOrderByPriorityDesc(
 				Constants.FARE_DATETIME_MOCK_5, Constants.FARE_DATETIME_MOCK_5, Constants.PRODUCT_ID_MOCK,
 				Constants.BRAND_ID_MOCK);
 
 		Assertions.assertTrue(fareFoundOpt.isPresent());
-		validateGeneralAssertions(fareModel, fareFoundOpt.get());
+		validateGeneralAssertions(fareDTOMock_time5, fareFoundOpt.get());
 	}
 
-	private void validateGeneralAssertions(FareModel fareModel, Fare fareFound) {
+	private void validateGeneralAssertions(FareDTO fareDTO, FareEntity fareFound) {
 
-		Assertions.assertEquals(fareFound.getBrandId(), fareModel.getBrandId());
-		Assertions.assertEquals(fareFound.getProductId(), fareModel.getProductId());
-		Assertions.assertTrue(fareModel.getStartDate().isAfter(fareFound.getStartDate()), "DateTimeMock is after fare startDate");
-		Assertions.assertTrue(fareModel.getStartDate().isBefore(fareFound.getEndDate()), "DateTimeMock is before fare endDate");
+		Assertions.assertEquals(fareFound.getBrandId(), fareDTO.getBrandId());
+		Assertions.assertEquals(fareFound.getProductId(), fareDTO.getProductId());
+		Assertions.assertTrue(fareDTO.getStartDate().isAfter(fareFound.getStartDate()), "DateTimeMock is after fare startDate");
+		Assertions.assertTrue(fareDTO.getStartDate().isBefore(fareFound.getEndDate()), "DateTimeMock is before fare endDate");
 	}
 
 }

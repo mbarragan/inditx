@@ -1,8 +1,8 @@
-package com.example.inditx.application.rest.controller;
+package com.example.inditx.infraestructure.adapter.in.controller;
 
 import com.example.inditx.domain.Constants;
-import com.example.inditx.domain.model.FareModel;
-import com.example.inditx.domain.service.FareService;
+import com.example.inditx.domain.model.FareDTO;
+import com.example.inditx.domain.ports.in.service.FareService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,16 +37,16 @@ public class FareController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Find the right fare",
             content = { @Content(mediaType = "application/json",
-                schema = @Schema(implementation = FareModel.class)) }),
+                schema = @Schema(implementation = FareDTO.class)) }),
         @ApiResponse(responseCode = "404", description = "No fares were found",
             content = @Content) })
     @PostMapping(
         value = {"/fare"},
         produces = {"application/json"},
         consumes = {"application/json"})
-    public ResponseEntity<FareModel> getFare(@RequestBody FareModel fareModel) {
-        log.debug("Entering with fareModel {}", fareModel);
-        Optional<FareModel> filteredFareModelOpt = fareService.getFareByProductAndBrand(fareModel);
+    public ResponseEntity<FareDTO> getFare(@RequestBody FareDTO fareDTO) {
+        log.debug("Entering with fareDTO {}", fareDTO);
+        Optional<FareDTO> filteredFareModelOpt = fareService.getFareByProductAndBrand(fareDTO);
         if (filteredFareModelOpt.isEmpty()) {
             log.debug(Constants.MESSAGE_FARE_NOT_FOUND);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, Constants.MESSAGE_FARE_NOT_FOUND);

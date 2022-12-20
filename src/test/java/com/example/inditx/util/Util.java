@@ -1,6 +1,7 @@
 package com.example.inditx.util;
 
-import com.example.inditx.domain.model.FareModel;
+import com.example.inditx.domain.model.FareDTO;
+import com.example.inditx.domain.model.FareEntity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,14 +25,15 @@ public class Util {
         return dateTime.toString();
     }
 
-    public static FareModel getFareModelMock() {
-        return new FareModel(null, Constants.PRODUCT_ID_MOCK,
+    public static FareDTO getFareDTOMock() {
+        return new FareDTO(null, Constants.PRODUCT_ID_MOCK,
             Constants.FARE_DATETIME_MOCK_2, null, Constants.BRAND_ID_MOCK, null);
     }
 
-    public static FareModel getFareModelMock1() {
-        return new FareModel(1L, Constants.PRODUCT_ID_MOCK,
-            Constants.FARE_DATETIME_MOCK_2, Constants.FARE_END_DATETIME_MOCK, Constants.BRAND_ID_MOCK,
-            Constants.FARE_AMOUNT_MOCK);
+    public static FareEntity getFareEntityMock() {
+        return new FareEntity(1L, Constants.PRODUCT_ID_MOCK,
+            Constants.FARE_START_DATETIME_MOCK,
+            Constants.FARE_END_DATETIME_MOCK, Constants.BRAND_ID_MOCK, Constants.FARE_AMOUNT_MOCK,
+            Constants.FARE_PRIORITY_MOCK, Constants.FARE_CURRENCY_MOCK);
     }
 }

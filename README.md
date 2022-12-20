@@ -4,7 +4,7 @@ Rest Microservice [Spring Boot v2.7.6](http://projects.spring.io/spring-boot/) s
 See technical documentation (Postman collection as a resource, [OpenAPI](http://localhost:8080/api-docs) 
 and [Swagger](http://localhost:8080/swagger-ui.html) ) on the project root.
 
-You can find the requested tests as described below in class `ItxDemoIntegrationTest.java` implemented in 
+You can find the requested tests as described below in class `InditxAplicationTests.java` implemented in 
 [JUnit5](https://junit.org/junit5/docs/current/user-guide/).
 
 
@@ -17,9 +17,6 @@ For building and running the application you need:
 - [JDK 11](https://www.oracle.com/java/technologies/downloads/#java11)
 - [Maven 3](https://maven.apache.org)
 
-Arquitecture based on the article
-[Organizing Layers Using Hexagonal Architecture, DDD, and Spring](https://www.baeldung.com/hexagonal-architecture-ddd-spring) 
-by Baeldung.
 
 ---------------------------------
 ## La prueba
